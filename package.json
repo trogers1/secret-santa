@@ -4,15 +4,19 @@
   "description": "Secret Santa assignment system",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node index.ts",
-    "build": "tsc",
-    "test": "jest"
-  },
-  "dependencies": {
-    "@types/node": "^20.0.0",
-    "typescript": "^5.0.0"
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "ts-node": "^10.9.0"
+    "vitest": "^1.0.0",
+    "@vitest/ui": "^1.0.0",
+    "@vitest/coverage-v8": "^1.0.0",
+    "jsdom": "^23.0.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
   }
 }
