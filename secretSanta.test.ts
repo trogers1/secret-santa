@@ -68,6 +68,15 @@ describe("SecretSanta Edge Case Tests", () => {
         "Need at least 2 people for Secret Santa",
       );
     });
+
+    test("should throw error if people have non-unique IDs", () => {
+      const nonUniqueIds = [...testPeople];
+      nonUniqueIds.push(nonUniqueIds[0]);
+
+      expect(() => new SecretSanta({ details, people: nonUniqueIds })).toThrow(
+        "unique",
+      );
+    });
   });
 
   describe("Constraint Edge Cases", () => {

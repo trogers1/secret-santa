@@ -9,6 +9,10 @@ export class SecretSanta {
   private constraints: Constraints;
 
   constructor(config: SecretSantaConfig) {
+    const uniqueIds = new Set(config.people.map((person) => person.id));
+    if (uniqueIds.size !== config.people.length) {
+      throw new Error(`All person IDs must be unique. Found matching IDs.`);
+    }
     this.people = [...config.people];
     this.constraints = config.constraints || { illegalPairings: [] };
     this.details = config.details;
