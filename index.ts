@@ -42,9 +42,7 @@ try {
   console.log("\n");
 
   // Generate text files for email attachments
-  secretSanta.generateEmailFiles(
-    `./secret-santa-${new Intl.DateTimeFormat().format().slice(0, 4)}`,
-  );
+  secretSanta.generateEmailFiles(`./secret-santa-${new Date().getFullYear()}`);
 
   console.log(
     "\n✅ All files created! You can now attach the .txt files to emails.",
