@@ -1,7 +1,7 @@
 import { SecretSanta } from "./secretSanta";
 import { Person, Constraints } from "./types";
 
-// Sample people
+// TODO: Update people
 const people: Person[] = [
   { id: "taylor", name: "Taylor Rogers" },
   { id: "bob", name: "Bob Smith" },
@@ -10,6 +10,12 @@ const people: Person[] = [
   { id: "edward", name: "Edward Norton" },
   { id: "fiona", name: "Fiona Gallagher" },
 ];
+
+// TODO: Update exchange details
+const details = `
+- Budget: $25
+- Date: December 25th
+`;
 
 // Define constraints
 const constraints: Constraints = {
@@ -27,6 +33,7 @@ const constraints: Constraints = {
 
 // Create and run Secret Santa
 const secretSanta = new SecretSanta({
+  details,
   people,
   constraints,
   allowSelfAssignment: false, // Important: no one should get themselves

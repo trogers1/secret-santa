@@ -29,16 +29,25 @@ cd secret-santa
 
 ### 2. Update the necessary files
 
-**[index.ts](./index.ts):** Update the people array to match your actual participants:
+**[index.ts](./index.ts):** Update the `people` array to match your actual participants and the `details` string:
 
 ```ts
 // Add your people...
 const people: Person[] = [
   { id: "alice", name: "Alice Johnson" },
-  { id: "bob", name: "Bob Smith" },
-  { id: "bob2", name: "Bob Johnson" },
+  { id: "bob-s", name: "Bob Smith" },
+  { id: "bob-j", name: "Bob Johnson" },
 ];
+
+const details: `
+- Gift Budget: $25
+- Exchange Date: December 25
+- Zoom link: zoom.us/910921u32
+`;
+
 ```
+
+ then 
 
 ### 3. Install dependencies
 
@@ -52,6 +61,14 @@ bun install
 bun index.ts
 ```
 
+### 5. Send Emails With Assignments
+
+For each of your people, there will be a file named `<person.id>_assignment.txt`. 
+Simply send an email to each person and attach their `.txt` file for them to open and
+see who they have been assigned.
+
+Don't peak at the attachments! It'll ruin the surprise and put you on Santa's naughty list 🎅.
+
 ## 📁 Project Structure
 
 ```
@@ -64,7 +81,7 @@ secret-santa/
 └── README.md           # This file
 ```
 
-## 🎯 Usage
+## 🎯 In-Depth Usage
 
 ### Basic Example
 
@@ -72,13 +89,13 @@ secret-santa/
 import { SecretSanta } from "./secretSanta";
 import { Person } from "./types";
 
+// Add more people...
 const people: Person[] = [
-  { id: "alice", name: "Alice Johnson", email: "alice@example.com" },
-  { id: "bob", name: "Bob Smith", email: "bob@example.com" },
-  // Add more people...
+  { id: "alice", name: "Alice Johnson" },
+  { id: "bob-s", name: "Bob Smith" },
 ];
 
-const secretSanta = new SecretSanta({ people });
+const secretSanta = new SecretSanta({ details, people });
 
 // Generate assignments
 secretSanta.assign();
@@ -87,6 +104,7 @@ secretSanta.assign();
 secretSanta.generateEmailFiles(`./secret-santa-${new Date().getFullYear()}`);
 
 // See summary (optional - for organizer only)
+// WARNING: Then you'll know all assignments and be officially on the naughty list!
 console.log(secretSanta.getAssignmentsSummary());
 ```
 
@@ -98,6 +116,19 @@ console.log(secretSanta.getAssignmentsSummary());
   id: "unique_id",      // Unique identifier (used for constraints)
   name: "Full Name",    // Person's name (appears in emails)
 }
+```
+
+### Details string
+
+You must provide a string of extra `details` (e.g. Secret Santa price cap, date of the exchange, etc.).
+
+```ts
+const details: `
+Please feel free to bring your significant other (and their own gift!) to our party on Dec 21 at our home. 
+`
+
+const secretSanta = new SecretSanta({ details, people });
+
 ```
 
 ### Constraints

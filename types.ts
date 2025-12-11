@@ -16,6 +16,7 @@ export interface Constraints {
 
 export interface SecretSantaConfig {
   people: Person[];
+  details: string;
   constraints?: Constraints;
   allowSelfAssignment?: boolean;
 }

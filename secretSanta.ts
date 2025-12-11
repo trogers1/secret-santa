@@ -4,12 +4,14 @@ import { Person, Assignment, Constraints, SecretSantaConfig } from "./types";
 
 export class SecretSanta {
   private assignments: Assignment[] = [];
+  private details: string;
   private people: Person[];
   private constraints: Constraints;
 
   constructor(config: SecretSantaConfig) {
     this.people = [...config.people];
     this.constraints = config.constraints || { illegalPairings: [] };
+    this.details = config.details;
   }
 
   // Public method that should be called by users
@@ -249,8 +251,7 @@ Your Secret Santa assignment is:
 Remember, this is a secret! Don't tell anyone who you have.
 
 Gift exchange details:
-- Budget: $25
-- Date: December 25th
+${this.details}
 
 Happy gifting!`;
   }

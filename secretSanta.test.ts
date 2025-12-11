@@ -17,6 +17,11 @@ const testPeople: Person[] = [
   { id: "puss", name: "Puss in Boots" },
 ];
 
+const details = `
+- Gift amount: <$15
+- Bring an ugly sweater.
+`;
+
 describe("SecretSanta Edge Case Tests", () => {
   const testOutputDir = "./test-assignments";
 
@@ -39,7 +44,7 @@ describe("SecretSanta Edge Case Tests", () => {
   describe("Basic Functionality", () => {
     test("should assign everyone correctly with 2 people", () => {
       const people = testPeople.slice(0, 2);
-      const secretSanta = new SecretSanta({ people });
+      const secretSanta = new SecretSanta({ details, people });
       const assignments = secretSanta.assign();
 
       expect(assignments).toHaveLength(2);
@@ -49,7 +54,7 @@ describe("SecretSanta Edge Case Tests", () => {
 
     test("should throw error with only 1 person", () => {
       const people = testPeople.slice(0, 1);
-      const secretSanta = new SecretSanta({ people });
+      const secretSanta = new SecretSanta({ details, people });
 
       expect(() => secretSanta.assign()).toThrow(
         "Need at least 2 people for Secret Santa",
@@ -57,7 +62,7 @@ describe("SecretSanta Edge Case Tests", () => {
     });
 
     test("should throw error with 0 people", () => {
-      const secretSanta = new SecretSanta({ people: [] });
+      const secretSanta = new SecretSanta({ details, people: [] });
 
       expect(() => secretSanta.assign()).toThrow(
         "Need at least 2 people for Secret Santa",
@@ -79,9 +84,9 @@ describe("SecretSanta Edge Case Tests", () => {
       };
 
       const secretSanta = new SecretSanta({
+        details,
         people,
         constraints,
-        // Note: removed allowSelfAssignment since constructor doesn't accept it
       });
 
       // This should throw an error because no valid assignment exists
@@ -99,7 +104,7 @@ describe("SecretSanta Edge Case Tests", () => {
         ],
       };
 
-      const secretSanta = new SecretSanta({ people, constraints });
+      const secretSanta = new SecretSanta({ details, people, constraints });
 
       // Should succeed with other valid permutations
       const assignments = secretSanta.assign();
@@ -115,12 +120,9 @@ describe("SecretSanta Edge Case Tests", () => {
       });
     });
 
-    // REMOVED: allowSelfAssignment tests since it's not supported
-    // test("should allow self-assignment when configured", () => { ... })
-
     test("should prevent self-assignment by default", () => {
       const people = testPeople.slice(0, 3);
-      const secretSanta = new SecretSanta({ people });
+      const secretSanta = new SecretSanta({ details, people });
 
       const assignments = secretSanta.assign();
 
@@ -139,7 +141,7 @@ describe("SecretSanta Edge Case Tests", () => {
         ],
       };
 
-      const secretSanta = new SecretSanta({ people, constraints });
+      const secretSanta = new SecretSanta({ details, people, constraints });
       const assignments = secretSanta.assign();
 
       assignments.forEach((assignment) => {
@@ -174,7 +176,7 @@ describe("SecretSanta Edge Case Tests", () => {
         ],
       };
 
-      const secretSanta = new SecretSanta({ people, constraints });
+      const secretSanta = new SecretSanta({ details, people, constraints });
 
       // This should work because 'c' can give to 'f'
       expect(() => secretSanta.assign()).not.toThrow();
@@ -200,7 +202,7 @@ describe("SecretSanta Edge Case Tests", () => {
         ],
       };
 
-      const secretSanta = new SecretSanta({ people, constraints });
+      const secretSanta = new SecretSanta({ details, people, constraints });
 
       // This should fail fast due to Hall's condition check
       expect(() => secretSanta.assign()).toThrow(
@@ -223,7 +225,7 @@ describe("SecretSanta Edge Case Tests", () => {
         ],
       };
 
-      const secretSanta = new SecretSanta({ people, constraints });
+      const secretSanta = new SecretSanta({ details, people, constraints });
 
       expect(() => {
         const assignments = secretSanta.assign();
@@ -256,7 +258,7 @@ describe("SecretSanta Edge Case Tests", () => {
         ],
       };
 
-      const secretSanta = new SecretSanta({ people, constraints });
+      const secretSanta = new SecretSanta({ details, people, constraints });
       const assignments = secretSanta.assign();
 
       // Basic validation
@@ -282,7 +284,7 @@ describe("SecretSanta Edge Case Tests", () => {
 
       // Run multiple times
       for (let i = 0; i < 10; i++) {
-        const secretSanta = new SecretSanta({ people });
+        const secretSanta = new SecretSanta({ details, people });
         const assignments = secretSanta.assign();
         const assignmentString = JSON.stringify(
           assignments.sort((a, b) => a.giverId.localeCompare(b.giverId)),
@@ -297,7 +299,7 @@ describe("SecretSanta Edge Case Tests", () => {
 
     test("should ensure everyone gives and receives exactly once", () => {
       const people = testPeople.slice(0, 4);
-      const secretSanta = new SecretSanta({ people });
+      const secretSanta = new SecretSanta({ details, people });
       const assignments = secretSanta.assign();
 
       const giverIds = assignments.map((a) => a.giverId);
@@ -317,7 +319,10 @@ describe("SecretSanta Edge Case Tests", () => {
 
   describe("File Generation Edge Cases", () => {
     test("should throw error when generating files before assignment", () => {
-      const secretSanta = new SecretSanta({ people: testPeople.slice(0, 3) });
+      const secretSanta = new SecretSanta({
+        details,
+        people: testPeople.slice(0, 3),
+      });
 
       expect(() => secretSanta.generateEmailFiles(testOutputDir)).toThrow(
         "No assignments made yet",
@@ -326,7 +331,7 @@ describe("SecretSanta Edge Case Tests", () => {
 
     test("should create correct number of files", () => {
       const people = testPeople.slice(0, 3);
-      const secretSanta = new SecretSanta({ people });
+      const secretSanta = new SecretSanta({ details, people });
       secretSanta.assign();
 
       secretSanta.generateEmailFiles(testOutputDir);
@@ -353,7 +358,7 @@ describe("SecretSanta Edge Case Tests", () => {
         { id: "chen", name: "陈先生" },
       ];
 
-      const secretSanta = new SecretSanta({ people: specialPeople });
+      const secretSanta = new SecretSanta({ details, people: specialPeople });
       secretSanta.assign();
       secretSanta.generateEmailFiles(testOutputDir);
 
@@ -370,7 +375,10 @@ describe("SecretSanta Edge Case Tests", () => {
     });
 
     test("should handle non-existent output directory", () => {
-      const secretSanta = new SecretSanta({ people: testPeople.slice(0, 2) });
+      const secretSanta = new SecretSanta({
+        details,
+        people: testPeople.slice(0, 2),
+      });
       secretSanta.assign();
 
       const deepDir = "./deeply/nested/test/directory";
@@ -395,7 +403,7 @@ describe("SecretSanta Edge Case Tests", () => {
       }
 
       const constraints: Constraints = { illegalPairings };
-      const secretSanta = new SecretSanta({ people, constraints });
+      const secretSanta = new SecretSanta({ details, people, constraints });
 
       // Time the operation
       const startTime = performance.now();
@@ -426,7 +434,7 @@ describe("SecretSanta Edge Case Tests", () => {
         ],
       };
 
-      const secretSanta = new SecretSanta({ people, constraints });
+      const secretSanta = new SecretSanta({ details, people, constraints });
 
       expect(() => {
         const assignments = secretSanta.assign();
@@ -437,7 +445,7 @@ describe("SecretSanta Edge Case Tests", () => {
 
   describe("Filesystem I/O", () => {
     test("should create a file for each person", () => {
-      const secretSanta = new SecretSanta({ people: testPeople });
+      const secretSanta = new SecretSanta({ details, people: testPeople });
       secretSanta.assign();
 
       // Instead of spying, just verify the files were created
@@ -461,7 +469,7 @@ describe("SecretSanta Edge Case Tests", () => {
   describe("Error Cases", () => {
     test("should handle missing people in assignments gracefully", () => {
       const people = testPeople.slice(0, 3);
-      const secretSanta = new SecretSanta({ people });
+      const secretSanta = new SecretSanta({ details, people });
 
       // Simulate corrupted state (shouldn't happen in normal use)
       (secretSanta as any).assignments = [
@@ -474,7 +482,10 @@ describe("SecretSanta Edge Case Tests", () => {
     });
 
     test("should handle empty assignments summary", () => {
-      const secretSanta = new SecretSanta({ people: testPeople.slice(0, 3) });
+      const secretSanta = new SecretSanta({
+        details,
+        people: testPeople.slice(0, 3),
+      });
       const summary = secretSanta.getAssignmentsSummary();
       expect(summary).toBe("No assignments made yet.");
     });
