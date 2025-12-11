@@ -17,7 +17,7 @@ A robust, privacy-focused Secret Santa assignment system written in TypeScript, 
 
 ## 🚀 Quick Start
 
-### 1. Clone or create the project
+### 1. Clone the project
 
 ```bash
 # Clone this repository
@@ -32,10 +32,11 @@ cd secret-santa
 **[index.ts](./index.ts):** Update the people array to match your actual participants:
 
 ```ts
+// Add your people...
 const people: Person[] = [
-  { id: "alice", name: "Alice Johnson", email: "alice@example.com" },
-  { id: "bob", name: "Bob Smith", email: "bob@example.com" },
-  // Add your people...
+  { id: "alice", name: "Alice Johnson" },
+  { id: "bob", name: "Bob Smith" },
+  { id: "bob2", name: "Bob Johnson" },
 ];
 ```
 
@@ -48,7 +49,7 @@ bun install
 ### 4. Run the example
 
 ```bash
-bun run index.ts
+bun index.ts
 ```
 
 ## 📁 Project Structure
