@@ -147,7 +147,7 @@ Hello Taylor Rogers!
 
 Your Secret Santa assignment is:
 
-🎁 **Bob Smith** 🎁
+🎁 Bob Smith 🎁
 
 Remember, this is a secret! Don't tell anyone who you have.
 

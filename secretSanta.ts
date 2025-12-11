@@ -250,7 +250,7 @@ Hello ${giver.name}!
 
 Your Secret Santa assignment is:
 
-🎁 **${receiver.name}** 🎁
+🎁 ${receiver.name} 🎁
 
 Remember, this is a secret! Don't tell anyone who you have.
 
