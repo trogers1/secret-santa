@@ -29,21 +29,23 @@ cd secret-santa
 
 ### 2. Update the necessary files
 
-**[index.ts](./index.ts):** Update the `people` array to match your actual participants and the `details` string:
+**[input.ts](./input.ts):** Update the `people` array to match your actual participants and the `details` string (optionally `contstraints` as well):
 
 ```typescript
 // Add your people...
-const people: Person[] = [
+export const people: Person[] = [
   { id: "alice", name: "Alice Johnson" },
   { id: "bob-s", name: "Bob Smith" },
   { id: "bob-j", name: "Bob Johnson" },
 ];
 
-const details: `
+export const details: `
 - Gift Budget: $25
 - Exchange Date: December 25
 - Zoom link: zoom.us/910921u32
 `;
+
+// Optionally also the `constraints` variable
 
 ```
 
@@ -75,6 +77,7 @@ secret-santa/
 ├── secretSanta.ts      # Main Secret Santa class
 ├── secretSanta.test.ts # Secret Santa class test file 
 ├── index.ts            # Example/entry point
+├── input.ts            # Input variables (UPDATE THIS)
 ├── package.json        # Bun project configuration
 └── README.md           # This file
 ```
@@ -106,7 +109,7 @@ secretSanta.generateEmailFiles(`./secret-santa-${new Date().getFullYear()}`);
 console.log(secretSanta.getAssignmentsSummary());
 ```
 
-## 🔧 Configuration
+## 🔧 Configuration ([`input.ts`](./input.ts))
 
 ### Person Object
 ```typescript
@@ -124,25 +127,11 @@ You must provide a string of extra `details` (e.g. Secret Santa price cap, date 
 const details: `
 Please feel free to bring your significant other (and their own gift!) to our party on Dec 21 at our home. 
 `
-
-const secretSanta = new SecretSanta({ details, people });
-
 ```
 
 ### Constraints
 - **illegalPairings**: Array of `[giverId, receiverId]` pairs that are not allowed
 - **groups**: Array of arrays containing person IDs who shouldn't be assigned within their group
-
-### Output Directory
-By default, files are saved to `./secret-santa-assignments/`. You can customize this:
-
-```typescript
-// Use current year
-secretSanta.generateEmailFiles(`./secret-santa-${new Date().getFullYear()}`);
-
-// Custom directory
-secretSanta.generateEmailFiles("./my-custom-folder");
-```
 
 ## 📤 Output Files
 
@@ -167,6 +156,18 @@ Gift exchange details:
 - Date: December 25th
 
 Happy gifting!
+```
+
+### Output Directory
+
+By default, files are saved to `./secret-santa-assignments/`. You can customize this:
+
+```typescript
+// Use current year
+secretSanta.generateEmailFiles(`./secret-santa-${new Date().getFullYear()}`);
+
+// Custom directory
+secretSanta.generateEmailFiles("./my-custom-folder");
 ```
 
 ## 🧪 Testing
