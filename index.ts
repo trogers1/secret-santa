@@ -1,4 +1,3 @@
-// index.ts
 import { SecretSanta } from "./secretSanta";
 import { Person, Constraints } from "./types";
 
