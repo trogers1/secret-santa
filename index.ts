@@ -34,7 +34,7 @@ const secretSanta = new SecretSanta({
 });
 
 try {
-  const assignments = secretSanta.assign();
+  secretSanta.assign();
 
   console.log("🎄 Secret Santa Assignments 🎄");
   console.log("=============================");
@@ -42,7 +42,9 @@ try {
   console.log("\n");
 
   // Generate text files for email attachments
-  secretSanta.generateEmailFiles("./secret-santa-2024");
+  secretSanta.generateEmailFiles(
+    `./secret-santa-${new Intl.DateTimeFormat().format().slice(0, 4)}`,
+  );
 
   console.log(
     "\n✅ All files created! You can now attach the .txt files to emails.",
