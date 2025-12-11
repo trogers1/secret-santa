@@ -2,7 +2,6 @@
 export interface Person {
   id: string;
   name: string;
-  email: string;
 }
 
 export interface Assignment {

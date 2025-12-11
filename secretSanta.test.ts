@@ -6,15 +6,15 @@ import * as path from "path";
 
 // Test data
 const testPeople: Person[] = [
-  { id: "alice", name: "Alice", email: "alice@test.com" },
-  { id: "bob", name: "Bob", email: "bob@test.com" },
-  { id: "charlie", name: "Charlie", email: "charlie@test.com" },
-  { id: "diana", name: "Diana", email: "diana@test.com" },
-  { id: "edward", name: "Edward", email: "edward@test.com" },
-  { id: "fiona", name: "Fiona", email: "fiona@test.com" },
-  { id: "shrek", name: "Shrek", email: "shrek@test.com" },
-  { id: "donkey", name: "donkey", email: "donkey@test.com" },
-  { id: "puss", name: "Puss in Boots", email: "puss@test.com" },
+  { id: "alice", name: "Alice" },
+  { id: "bob", name: "Bob" },
+  { id: "charlie", name: "Charlie" },
+  { id: "diana", name: "Diana" },
+  { id: "edward", name: "Edward" },
+  { id: "fiona", name: "Fiona" },
+  { id: "shrek", name: "Shrek" },
+  { id: "donkey", name: "donkey" },
+  { id: "puss", name: "Puss in Boots" },
 ];
 
 describe("SecretSanta Edge Case Tests", () => {
@@ -157,12 +157,12 @@ describe("SecretSanta Edge Case Tests", () => {
     test("should work with overlapping groups when possible", () => {
       // Use people where the overlapping person has someone outside all their groups
       const people = [
-        { id: "a", name: "A", email: "a@test.com" },
-        { id: "b", name: "B", email: "b@test.com" },
-        { id: "c", name: "C", email: "c@test.com" }, // In both groups
-        { id: "d", name: "D", email: "d@test.com" },
-        { id: "e", name: "E", email: "e@test.com" },
-        { id: "f", name: "F", email: "f@test.com" }, // Not in any group
+        { id: "a", name: "A" },
+        { id: "b", name: "B" },
+        { id: "c", name: "C" }, // In both groups
+        { id: "d", name: "D" },
+        { id: "e", name: "E" },
+        { id: "f", name: "F" }, // Not in any group
       ];
 
       const constraints: Constraints = {
@@ -348,9 +348,9 @@ describe("SecretSanta Edge Case Tests", () => {
 
     test("should handle special characters in names", () => {
       const specialPeople: Person[] = [
-        { id: "john_doe", name: "John O'Connor-Doe", email: "john@test.com" },
-        { id: "maria", name: "María García", email: "maria@test.com" },
-        { id: "chen", name: "陈先生", email: "chen@test.com" },
+        { id: "john_doe", name: "John O'Connor-Doe" },
+        { id: "maria", name: "María García" },
+        { id: "chen", name: "陈先生" },
       ];
 
       const secretSanta = new SecretSanta({ people: specialPeople });

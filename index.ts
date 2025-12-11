@@ -4,12 +4,12 @@ import { Person, Constraints } from "./types";
 
 // Sample people
 const people: Person[] = [
-  { id: "alice", name: "Alice Johnson", email: "alice@example.com" },
-  { id: "bob", name: "Bob Smith", email: "bob@example.com" },
-  { id: "charlie", name: "Charlie Brown", email: "charlie@example.com" },
-  { id: "diana", name: "Diana Prince", email: "diana@example.com" },
-  { id: "edward", name: "Edward Norton", email: "edward@example.com" },
-  { id: "fiona", name: "Fiona Gallagher", email: "fiona@example.com" },
+  { id: "taylor", name: "Taylor Rogers" },
+  { id: "bob", name: "Bob Smith" },
+  { id: "charlie", name: "Charlie Brown" },
+  { id: "diana", name: "Diana Prince" },
+  { id: "edward", name: "Edward Norton" },
+  { id: "fiona", name: "Fiona Gallagher" },
 ];
 
 // Define constraints

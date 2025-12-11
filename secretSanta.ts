@@ -262,7 +262,7 @@ Happy gifting!`;
         const receiver = this.people.find(
           (p) => p.id === assignment.receiverId,
         );
-        return `${giver?.name} (${giver?.email}) → ${receiver?.name}`;
+        return `${giver?.name} (${giver?.id}) → ${receiver?.name}`;
       })
       .join("\n");
 
