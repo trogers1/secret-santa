@@ -31,7 +31,7 @@ cd secret-santa
 
 **[index.ts](./index.ts):** Update the `people` array to match your actual participants and the `details` string:
 
-```ts
+```typescript
 // Add your people...
 const people: Person[] = [
   { id: "alice", name: "Alice Johnson" },
@@ -46,8 +46,6 @@ const details: `
 `;
 
 ```
-
- then 
 
 ### 3. Install dependencies
 
