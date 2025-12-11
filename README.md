@@ -6,7 +6,7 @@ A robust, privacy-focused Secret Santa assignment system written in TypeScript, 
 
 - **Privacy First**: Organizer never sees the assignments - each person gets their own file
 - **Complex Constraints**: Support for illegal pairings and group restrictions
-- **Guaranteed Validity**: Uses Hall's marriage theorem to verify assignments are possible
+- **Guaranteed Validity**: Uses [Hall's marriage theorem](https://en.wikipedia.org/wiki/Hall%27s_marriage_theorem) to verify assignments are possible
 - **Email Ready**: Generates individual text files ready to attach to emails
 - **Zero Configuration**: Works out of the box with Bun.sh
 
