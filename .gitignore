@@ -2,3 +2,5 @@
 node_modules/**
 
 secret-santa-*/
+
+**/.DS_Store
